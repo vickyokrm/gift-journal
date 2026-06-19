@@ -1,0 +1,53 @@
+managed implementation in class ZOV_CL_BP_R_DB_GIFT unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZOV_R_DB_GIFT alias ZovRDbGift
+persistent table ZOV_DB_GIFT
+extensible
+draft table ZOV_DB_GIFT_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+{
+  field ( mandatory : create )
+   ID;
+
+  field ( readonly )
+   CreatedBy,
+   CreatedAt,
+   LocalLastChangedBy,
+   LocalLastChangedAt,
+   LastChangedAt;
+
+  field ( readonly : update )
+   ID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZOV_DB_GIFT corresponding extensible
+  {
+    ID = ID;
+    Inviter = INVITER;
+    Invitee = INVITEE;
+    EventID = EVENT_ID;
+    GiftType = GIFT_TYPE;
+    Amount = AMOUNT;
+    CurrencyCode = CURRENCY_CODE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt = LAST_CHANGED_AT;
+  }
+
+}

@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZOV_R_DB_GIFT'
+@MappingRole: true
+define role ZOV_R_DB_GIFT {
+  grant select on ZOV_R_DB_GIFT
+  where TRUE;
+}

@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZOV_C_DB_GIFT'
+@MappingRole: true
+define role ZOV_C_DB_GIFT {
+  grant select on ZOV_C_DB_GIFT
+  where INHERITING CONDITIONS FROM ENTITY ZOV_R_DB_GIFT REPLACING { ROOT WITH _BaseEntity };
+}

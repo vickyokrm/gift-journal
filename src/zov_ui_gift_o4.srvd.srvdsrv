@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZOV_C_DB_GIFT'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZOV_C_DB_GIFT'
+  }
+}
+define service ZOV_UI_GIFT_O4 provider contracts odata_v4_ui {
+  expose ZOV_C_DB_GIFT;
+}

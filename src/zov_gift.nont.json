@@ -1,0 +1,11 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "SAP Object Node Type ZOV_GIFT",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "name": "ZOV_GIFT",
+  "sapObjectType": "ZOV_GIFT",
+  "rootNode": true
+}
