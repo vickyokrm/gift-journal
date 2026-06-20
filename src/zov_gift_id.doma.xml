@@ -3,12 +3,12 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <DD01V>
-    <DOMNAME>ZOV_PERNR</DOMNAME>
+    <DOMNAME>ZOV_GIFT_ID</DOMNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
     <DATATYPE>RAW</DATATYPE>
     <LENG>000016</LENG>
     <OUTPUTLEN>000032</OUTPUTLEN>
-    <DDTEXT>Pernr</DDTEXT>
+    <DDTEXT>Gift Id</DDTEXT>
     <DOMMASTER>E</DOMMASTER>
    </DD01V>
   </asx:values>

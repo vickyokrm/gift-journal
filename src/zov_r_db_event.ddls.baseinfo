@@ -3,15 +3,10 @@
 {
 "FROM":
 [
-"ZOV_R_DB_EVENT",
-"ZOV_R_DB_PERSON",
-"ZOV_DB_GIFT"
+"ZOV_DB_EVENT"
 ],
 "ASSOCIATED":
-[
-"ZOV_R_DB_EVENT",
-"ZOV_R_DB_PERSON"
-],
+[],
 "BASE":
 [],
 "ANNO_REF":
