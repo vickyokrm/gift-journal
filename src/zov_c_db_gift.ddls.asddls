@@ -1,54 +1,71 @@
 @Metadata.allowExtensions: true
 @Metadata.ignorePropagatedAnnotations: true
-@Endusertext: {
-  Label: '###GENERATED Core Data Service Entity'
+@EndUserText: {
+  label: '###GENERATED Core Data Service Entity'
 }
-@Objectmodel: {
-  Sapobjectnodetype.Name: 'ZOV_GIFT'
+@ObjectModel: {
+  sapObjectNodeType.name: 'ZOV_GIFT'
 }
 @OData.entityType.name: 'Gift_Type'
 @AccessControl.authorizationCheck: #MANDATORY
 define root view entity ZOV_C_DB_GIFT
-  provider contract TRANSACTIONAL_QUERY
+  provider contract transactional_query
   as projection on ZOV_R_DB_GIFT
   association [1..1] to ZOV_R_DB_GIFT as _BaseEntity on $projection.ID = _BaseEntity.ID
 {
   key ID,
-  Inviter,
-  Invitee,
-  EventID,
-  GiftType,
-  @Semantics: {
-    Amount.Currencycode: 'CurrencyCode'
-  }
-  Amount,
-  @Consumption: {
-    Valuehelpdefinition: [ {
-      Entity.Element: 'Currency', 
-      Entity.Name: 'I_CurrencyStdVH', 
-      Useforvalidation: true
-    } ]
-  }
-  CurrencyCode,
-  @Semantics: {
-    User.Createdby: true
-  }
-  CreatedBy,
-  @Semantics: {
-    Systemdatetime.Createdat: true
-  }
-  CreatedAt,
-  @Semantics: {
-    User.Localinstancelastchangedby: true
-  }
-  LocalLastChangedBy,
-  @Semantics: {
-    Systemdatetime.Localinstancelastchangedat: true
-  }
-  LocalLastChangedAt,
-  @Semantics: {
-    Systemdatetime.Lastchangedat: true
-  }
-  LastChangedAt,
-  _BaseEntity
+
+      @EndUserText.label: 'Inviter ID'
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZOV_I_PERSON_VH', element: 'PersonId' } } ]
+      InviterId,
+
+      @EndUserText.label: 'Inviter'
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZOV_I_PERSON_VH', element: 'PersonId' } } ]
+      Inviter,
+
+      @EndUserText.label: 'Invitee ID'
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZOV_I_PERSON_VH', element: 'PersonId' } } ]
+      InviteeId,
+
+      @EndUserText.label: 'Invitee'
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZOV_I_PERSON_VH', element: 'PersonId' } } ]
+      Invitee,
+
+      @EndUserText.label: 'Event'
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZOV_I_EVENT_VH', element: 'EventId' } } ]
+      EventID,
+
+      @EndUserText.label: 'Event Title'
+      EventTitle,
+
+      @EndUserText.label: 'Gift Type'
+      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZOV_I_GIFT_TYPE_VH', element: 'Value' } } ]
+      GiftType,
+
+      @EndUserText.label: 'Gift Date'
+//      @Consumption.valueHelpDefinition: [ { entity: { name: 'ZOV_I_GIFT_TYPE_VH', element: 'Value' } } ]
+      GiftDate,
+
+      @Semantics.amount.currencyCode: 'CurrencyCode'
+      Amount,
+
+      @Consumption.valueHelpDefinition: [ {
+        entity.element: 'Currency',
+        entity.name: 'I_CurrencyStdVH',
+        useForValidation: true
+      } ]
+      CurrencyCode,
+
+      @Semantics.user.createdBy: true
+      CreatedBy,
+      @Semantics.systemDateTime.createdAt: true
+      CreatedAt,
+      @Semantics.user.localInstanceLastChangedBy: true
+      LocalLastChangedBy,
+      @Semantics.systemDateTime.localInstanceLastChangedAt: true
+      LocalLastChangedAt,
+      @Semantics.systemDateTime.lastChangedAt: true
+      LastChangedAt,
+
+      _BaseEntity
 }

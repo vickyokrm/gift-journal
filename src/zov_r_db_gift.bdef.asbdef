@@ -2,6 +2,9 @@ managed implementation in class ZOV_CL_BP_R_DB_GIFT unique;
 strict ( 2 );
 with draft;
 extensible;
+
+
+
 define behavior for ZOV_R_DB_GIFT alias Gift
 persistent table ZOV_DB_GIFT
 extensible
@@ -10,7 +13,7 @@ etag master LocalLastChangedAt
 lock master total etag LastChangedAt
 authorization master( global )
 {
-  field ( mandatory : create )
+  field ( numbering : managed, readonly )
    ID;
 
   field ( readonly )
@@ -19,9 +22,6 @@ authorization master( global )
    LocalLastChangedBy,
    LocalLastChangedAt,
    LastChangedAt;
-
-  field ( readonly : update )
-   ID;
 
 
   create;
@@ -34,6 +34,15 @@ authorization master( global )
   draft action Resume;
   draft determine action Prepare;
 
+  action AddPerson;
+  action createEvent;
+ // Determinations
+  determination SetDefaultValues on modify { create; }
+
+  // Validations
+  validation ValidateAmount on save { field Amount; create; update; }
+
+
   mapping for ZOV_DB_GIFT corresponding extensible
   {
     ID = ID;
@@ -41,6 +50,7 @@ authorization master( global )
     Invitee = INVITEE;
     EventID = EVENT_ID;
     GiftType = GIFT_TYPE;
+    GiftDate = GIFT_DATE;
     Amount = AMOUNT;
     CurrencyCode = CURRENCY_CODE;
     CreatedBy = CREATED_BY;

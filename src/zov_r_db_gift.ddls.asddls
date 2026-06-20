@@ -16,6 +16,7 @@ define root view entity ZOV_R_DB_GIFT
       event_id              as EventID,
       _Event.Title          as EventTitle,
       gift_type             as GiftType,
+      gift_date             as GiftDate,   
       @Semantics.amount.currencyCode: 'CurrencyCode'
       amount                as Amount,
       @Consumption.valueHelpDefinition: [ {

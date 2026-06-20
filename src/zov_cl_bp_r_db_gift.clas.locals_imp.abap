@@ -1,13 +1,77 @@
-CLASS LHC_ZOV_R_DB_GIFT DEFINITION INHERITING FROM CL_ABAP_BEHAVIOR_HANDLER.
+CLASS lhc_zov_r_db_gift DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
     METHODS:
-      GET_GLOBAL_AUTHORIZATIONS FOR GLOBAL AUTHORIZATION
+      get_global_authorizations FOR GLOBAL AUTHORIZATION
         IMPORTING
-           REQUEST requested_authorizations FOR Gift
-        RESULT result.
+        REQUEST requested_authorizations FOR Gift
+        RESULT result,
+      AddPerson FOR MODIFY
+        IMPORTING keys FOR ACTION Gift~AddPerson,
+      createEvent FOR MODIFY
+        IMPORTING keys FOR ACTION Gift~createEvent,
+      SetDefaultValues FOR DETERMINE ON MODIFY
+        IMPORTING keys FOR Gift~SetDefaultValues.
+
+    METHODS ValidateAmount FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Gift~ValidateAmount.
+
 ENDCLASS.
 
-CLASS LHC_ZOV_R_DB_GIFT IMPLEMENTATION.
-  METHOD GET_GLOBAL_AUTHORIZATIONS.
+CLASS lhc_zov_r_db_gift IMPLEMENTATION.
+  METHOD get_global_authorizations.
   ENDMETHOD.
+  METHOD AddPerson.
+    "TODO: Implement AddPerson action
+    "  - Validate the person key supplied in the action parameters
+    "  - Read/validate from ZOV_DB_PERSON
+    "  - Update the gift record's inviter/invitee fields
+    "  - Report success or failure via failed/reported tables
+  ENDMETHOD.
+  METHOD createEvent.
+
+  ENDMETHOD.
+
+  METHOD SetDefaultValues.
+
+    READ ENTITIES OF zov_r_db_gift IN LOCAL MODE
+      ENTITY Gift
+        FIELDS ( Amount CurrencyCode GiftType GiftDate )
+        WITH CORRESPONDING #( keys )
+      RESULT DATA(lt_gifts).
+
+    CHECK lt_gifts IS NOT INITIAL.
+
+
+    MODIFY ENTITIES OF zov_r_db_gift IN LOCAL MODE
+      ENTITY Gift
+        UPDATE FIELDS ( GiftDate CurrencyCode )
+        WITH VALUE #( FOR ls_gift IN lt_gifts ( %tky = ls_gift-%tky
+                                                 GiftDate = COND #( WHEN ls_gift-GiftDate IS INITIAL THEN cl_abap_context_info=>get_system_date( )
+                                                                    ELSE ls_gift-GiftDate )
+                                                 CurrencyCode = 'INR' ) ).
+
+  ENDMETHOD.
+
+  METHOD ValidateAmount.
+
+    READ ENTITIES OF zov_r_db_gift IN LOCAL MODE
+    ENTITY Gift
+    FIELDS ( Amount )
+    WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_gifts).
+
+    LOOP AT lt_gifts INTO DATA(ls_gift).
+      IF ls_gift-Amount <= 0.
+        "Report error for invalid amount
+        APPEND VALUE #( %tky = ls_gift-%tky ) TO failed-Gift.
+        " Optionally, add a message to explain the failure
+        APPEND VALUE #( %tky = ls_gift-%tky
+                        %msg = new_message( id = 'ZOV_R_DB_GIFT'
+                                            number = '001'
+                                            severity = if_abap_behv_message=>severity-error ) ) TO reported-Gift.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+
 ENDCLASS.
