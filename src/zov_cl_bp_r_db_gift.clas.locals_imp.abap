@@ -3,7 +3,7 @@ CLASS LHC_ZOV_R_DB_GIFT DEFINITION INHERITING FROM CL_ABAP_BEHAVIOR_HANDLER.
     METHODS:
       GET_GLOBAL_AUTHORIZATIONS FOR GLOBAL AUTHORIZATION
         IMPORTING
-           REQUEST requested_authorizations FOR ZovRDbGift
+           REQUEST requested_authorizations FOR Gift
         RESULT result.
 ENDCLASS.
 

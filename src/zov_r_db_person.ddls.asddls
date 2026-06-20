@@ -1,11 +1,10 @@
 @AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #NOT_REQUIRED
-@EndUserText.label: 'Person Basic Interface View'
+@EndUserText.label: 'Person'
 @Metadata.ignorePropagatedAnnotations: true
 define view entity ZOV_R_DB_PERSON
   as select from zov_db_person
 {
-  key pernr                 as Pernr,
   key id                    as Id,
       firstname             as Firstname,
       lastname              as Lastname,

@@ -2,7 +2,7 @@ managed implementation in class ZOV_CL_BP_R_DB_GIFT unique;
 strict ( 2 );
 with draft;
 extensible;
-define behavior for ZOV_R_DB_GIFT alias ZovRDbGift
+define behavior for ZOV_R_DB_GIFT alias Gift
 persistent table ZOV_DB_GIFT
 extensible
 draft table ZOV_DB_GIFT_D

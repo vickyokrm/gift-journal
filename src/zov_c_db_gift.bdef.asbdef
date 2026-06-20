@@ -3,7 +3,7 @@ strict ( 2 );
 extensible;
 use draft;
 use side effects;
-define behavior for ZOV_C_DB_GIFT alias ZovCDbGift
+define behavior for ZOV_C_DB_GIFT alias Gift
 extensible
 use etag
 {

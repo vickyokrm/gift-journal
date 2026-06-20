@@ -6,6 +6,7 @@
 @Objectmodel: {
   Sapobjectnodetype.Name: 'ZOV_GIFT'
 }
+@OData.entityType.name: 'Gift_Type'
 @AccessControl.authorizationCheck: #MANDATORY
 define root view entity ZOV_C_DB_GIFT
   provider contract TRANSACTIONAL_QUERY

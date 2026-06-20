@@ -1,10 +1,10 @@
 @AccessControl.authorizationCheck: #MANDATORY
 @Metadata.allowExtensions: true
-@ObjectModel.sapObjectNodeType.name: 'ZOV_DB_GIFT'
-@EndUserText.label: 'Gift Journal Entry - Basic Int View'
+@ObjectModel.sapObjectNodeType.name: 'ZOV_GIFT'
+@EndUserText.label: '###GENERATED Core Data Service Entity'
 define root view entity ZOV_R_DB_GIFT
   as select from zov_db_gift
-  association [1..1] to ZOV_R_DB_EVENT  as _Event   on $projection.EventID   = _Event.Id
+  association [1..1] to ZOV_R_DB_EVENT  as _Event   on $projection.EventID  = _Event.Id
   association [1..1] to ZOV_R_DB_PERSON as _Inviter on $projection.InviterId = _Inviter.Id
   association [1..1] to ZOV_R_DB_PERSON as _Invitee on $projection.InviteeId = _Invitee.Id
 {
@@ -40,3 +40,4 @@ define root view entity ZOV_R_DB_GIFT
       _Inviter,
       _Invitee
 }
+

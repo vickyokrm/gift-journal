@@ -5,7 +5,7 @@
    <DDLS>
     <DDLNAME>ZOV_R_DB_EVENT</DDLNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
-    <DDTEXT>Basic View Event</DDTEXT>
+    <DDTEXT>Events</DDTEXT>
     <SOURCE_TYPE>W</SOURCE_TYPE>
    </DDLS>
   </asx:values>

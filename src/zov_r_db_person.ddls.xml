@@ -5,7 +5,7 @@
    <DDLS>
     <DDLNAME>ZOV_R_DB_PERSON</DDLNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
-    <DDTEXT>asdad</DDTEXT>
+    <DDTEXT>Person</DDTEXT>
     <SOURCE_TYPE>W</SOURCE_TYPE>
    </DDLS>
   </asx:values>
