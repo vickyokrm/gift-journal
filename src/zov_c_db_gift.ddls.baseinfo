@@ -7,10 +7,14 @@
 ],
 "ASSOCIATED":
 [
+"ZOV_C_ATTACHMENT",
+"ZOV_R_ATTACHMENT",
 "ZOV_R_DB_GIFT"
 ],
 "BASE":
-[],
+[
+"ZOV_R_DB_GIFT"
+],
 "ANNO_REF":
 [],
 "SCALAR_FUNCTION":

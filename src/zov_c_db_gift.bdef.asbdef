@@ -17,4 +17,15 @@ use etag
   use action Resume;
   use action Prepare;
 
+  use association _Attachments { create; with draft; }
+
+}
+
+
+define behavior for ZOV_C_ATTACHMENT alias Child
+{
+  use update;
+  use delete;
+
+  use association _Gift { with draft; }
 }

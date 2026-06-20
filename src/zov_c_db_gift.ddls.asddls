@@ -67,5 +67,6 @@ define root view entity ZOV_C_DB_GIFT
       @Semantics.systemDateTime.lastChangedAt: true
       LastChangedAt,
 
-      _BaseEntity
+      _BaseEntity,
+      _Attachments : redirected to composition child ZOV_C_ATTACHMENT
 }

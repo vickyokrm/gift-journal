@@ -7,6 +7,9 @@ define root view entity ZOV_R_DB_GIFT
   association [1..1] to ZOV_R_DB_EVENT  as _Event   on $projection.EventID  = _Event.Id
   association [1..1] to ZOV_R_DB_PERSON as _Inviter on $projection.InviterId = _Inviter.Id
   association [1..1] to ZOV_R_DB_PERSON as _Invitee on $projection.InviteeId = _Invitee.Id
+  
+  composition of exact one to many ZOV_R_ATTACHMENT as _Attachments
+  
 {
   key id                    as ID,
       inviter               as InviterId,
@@ -39,6 +42,8 @@ define root view entity ZOV_R_DB_GIFT
       // Associations
       _Event,
       _Inviter,
-      _Invitee
+      _Invitee,
+      
+      _Attachments
 }
 

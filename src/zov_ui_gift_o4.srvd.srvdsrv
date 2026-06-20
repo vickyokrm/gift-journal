@@ -6,6 +6,8 @@
     name: 'ZOV_C_DB_GIFT'
   }
 }
-define service ZOV_UI_GIFT_O4 provider contracts odata_v4_ui {
-  expose ZOV_C_DB_GIFT as Gift;
+define service ZOV_UI_GIFT_O4
+  provider contracts odata_v4_ui {
+  expose ZOV_C_DB_GIFT    as Gift;
+  expose ZOV_C_ATTACHMENT as Attachments;
 }
