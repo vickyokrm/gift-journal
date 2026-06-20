@@ -5,19 +5,22 @@
 define view entity ZOV_R_DB_PERSON
   as select from zov_db_person
 {
-  key id                    as Id,
-      firstname             as Firstname,
-      lastname              as Lastname,
-      initials              as Initials,
-      city                  as City,
+  key id                                                  as Id,
+      firstname                                           as Firstname,
+      lastname                                            as Lastname,
+      initials                                            as Initials,
+      concat_with_space( 
+            concat_with_space( initials, firstname, 1 ), 
+            lastname, 1 )                                 as FullName,
+      city                                                as City,
       @Semantics.user.createdBy: true
-      created_by            as CreatedBy,
+      created_by                                          as CreatedBy,
       @Semantics.systemDateTime.createdAt: true
-      created_at            as CreatedAt,
+      created_at                                          as CreatedAt,
       @Semantics.user.localInstanceLastChangedBy: true
-      local_last_changed_by as LocalLastChangedBy,
+      local_last_changed_by                               as LocalLastChangedBy,
       @Semantics.systemDateTime.localInstanceLastChangedAt: true
-      local_last_changed_at as LocalLastChangedAt,
+      local_last_changed_at                               as LocalLastChangedAt,
       @Semantics.systemDateTime.lastChangedAt: true
-      last_changed_at       as LastChangedAt
+      last_changed_at                                     as LastChangedAt
 }

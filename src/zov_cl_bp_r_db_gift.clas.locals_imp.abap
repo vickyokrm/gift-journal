@@ -66,7 +66,7 @@ CLASS lhc_zov_r_db_gift IMPLEMENTATION.
         APPEND VALUE #( %tky = ls_gift-%tky ) TO failed-Gift.
         " Optionally, add a message to explain the failure
         APPEND VALUE #( %tky = ls_gift-%tky
-                        %msg = new_message( id = 'ZOV_R_DB_GIFT'
+                        %msg = new_message( id = 'ZOV_GIFT'
                                             number = '001'
                                             severity = if_abap_behv_message=>severity-error ) ) TO reported-Gift.
       ENDIF.
