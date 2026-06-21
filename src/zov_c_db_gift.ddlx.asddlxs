@@ -8,8 +8,7 @@ annotate view ZOV_C_DB_GIFT with
 {
   @UI.facet: [
     { label: 'General Information', id: 'GeneralInfo',
-      purpose: #STANDARD, position: 10, type: #IDENTIFICATION_REFERENCE },
-    { id: 'Attachments', purpose: #STANDARD, type: #LINEITEM_REFERENCE, label: 'Attachments', position: 20, targetElement: '_Attachments' }
+      purpose: #STANDARD, position: 10, type: #IDENTIFICATION_REFERENCE }
   ]
 
   @UI.identification: [ { position: 10 } ]

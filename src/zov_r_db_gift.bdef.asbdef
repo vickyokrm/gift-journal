@@ -42,13 +42,13 @@ authorization master ( global )
   // Validations
   validation ValidateAmount on save { field Amount; create; update; }
 
-  association _Attachments { create; with draft; }
+  //  association _Attachments { create; with draft; }
 
   mapping for zov_db_gift corresponding extensible
     {
       ID                 = ID;
-      Inviter            = INVITER;
-      Invitee            = INVITEE;
+      InviterId          = INVITER;
+      InviteeId          = INVITEE;
       EventID            = EVENT_ID;
       GiftType           = GIFT_TYPE;
       GiftDate           = GIFT_DATE;
@@ -64,32 +64,32 @@ authorization master ( global )
 }
 
 
-define behavior for ZOV_R_ATTACHMENT alias Attachment
-persistent table zov_attachment
-draft table zov_attachment_d
-lock dependent by _Gift
-authorization dependent by _Gift
-etag master LocalLastChangedAt
-{
-  update;
-  delete;
-
-  field ( readonly, numbering : managed ) AttachmentId;
-  field ( readonly ) GiftId;
-
-  // Link back to root
-  association _Gift { with draft; }
-
-  mapping for zov_attachment corresponding
-    {
-        AttachmentId       = ATTACHMENT_ID;
-        GiftId             = GIFT_ID;
-        FileName           = FILE_NAME;
-        MimeType           = MIME_TYPE;
-        CreatedBy          = CREATED_BY;
-        CreatedAt          = CREATED_AT;
-        LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
-        LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
-        LastChangedAt      = LAST_CHANGED_AT;
-    }
-}
+//define behavior for ZOV_R_ATTACHMENT alias Attachment
+//persistent table zov_attachment
+//draft table zov_attachment_d
+//lock dependent by _Gift
+//authorization dependent by _Gift
+//etag master LocalLastChangedAt
+//{
+//  update;
+//  delete;
+//
+//  field ( readonly, numbering : managed ) AttachmentId;
+//  field ( readonly ) GiftId;
+//
+//  // Link back to root
+//  association _Gift { with draft; }
+//
+//  mapping for zov_attachment corresponding
+//    {
+//        AttachmentId       = ATTACHMENT_ID;
+//        GiftId             = GIFT_ID;
+//        FileName           = FILE_NAME;
+//        MimeType           = MIME_TYPE;
+//        CreatedBy          = CREATED_BY;
+//        CreatedAt          = CREATED_AT;
+//        LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+//        LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+//        LastChangedAt      = LAST_CHANGED_AT;
+//    }
+//}
