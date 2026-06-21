@@ -1,0 +1,38 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Cities', 
+    typeNamePlural: 'Cities', 
+    title: {
+      type: #STANDARD, 
+      value: 'Code'
+    }
+  }
+}
+annotate view ZI_Cities with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  } ]
+  @UI.facet: [ {
+    id: 'Cities', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Cities', 
+    position: 1 
+  } ]
+  Code;
+  
+  @UI.identification: [ {
+    position: 2 , 
+    label: 'Name'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'Name'
+  } ]
+  Name;
+}

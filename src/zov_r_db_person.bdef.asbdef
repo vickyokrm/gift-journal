@@ -1,0 +1,37 @@
+managed implementation in class zov_cl_bp_r_db_person unique;
+strict ( 2 );
+
+define behavior for ZOV_R_DB_PERSON alias Person
+persistent table zov_db_person
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly, numbering : managed ) Id;
+
+  field ( readonly )
+  CreatedBy,
+  CreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+
+  // 2. Ensure mapping is in place!
+  mapping for zov_db_person
+    {
+      ID                 = id;
+      FirstName          = firstname;
+      LastName           = lastname;
+      Initials           = initials;
+      City               = city;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LastChangedAt      = last_changed_at;
+      LocalLastChangedAt = local_last_changed_at;
+    }
+
+}

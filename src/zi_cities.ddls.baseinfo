@@ -3,11 +3,11 @@
 {
 "FROM":
 [
-"ZOV_R_DB_GIFT"
+"ZOV_CITIES"
 ],
 "ASSOCIATED":
 [
-"ZOV_R_DB_GIFT"
+"ZI_CITIES_S"
 ],
 "BASE":
 [],

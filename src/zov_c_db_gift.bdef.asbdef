@@ -17,6 +17,8 @@ use etag
   use action Resume;
   use action Prepare;
 
+  use action AddPerson;
+
 //  use association _Attachments { create; with draft; }
 
 }

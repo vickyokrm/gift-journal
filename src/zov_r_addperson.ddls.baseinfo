@@ -2,13 +2,9 @@
 "BASEINFO":
 {
 "FROM":
-[
-"ZOV_R_DB_GIFT"
-],
+[],
 "ASSOCIATED":
-[
-"ZOV_R_DB_GIFT"
-],
+[],
 "BASE":
 [],
 "ANNO_REF":

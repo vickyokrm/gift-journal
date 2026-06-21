@@ -1,0 +1,5 @@
+CLASS zov_cl_bp_r_db_person DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zov_r_db_person.
+ENDCLASS.
+
+CLASS zov_cl_bp_r_db_person IMPLEMENTATION.
+ENDCLASS.

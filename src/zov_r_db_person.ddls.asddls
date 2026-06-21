@@ -2,7 +2,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Person'
 @Metadata.ignorePropagatedAnnotations: true
-define view entity ZOV_R_DB_PERSON
+define root view entity ZOV_R_DB_PERSON
   as select from zov_db_person
 {
   key id                                                  as Id,

@@ -1,0 +1,85 @@
+managed with additional save implementation in class ZBP_I_CITIES_S unique;
+strict ( 1 );
+with draft;
+define behavior for ZI_Cities_S alias CitiesAll
+draft table ZOV_CITIES_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( features : instance )
+   TransportRequestID;
+
+  field ( notrigger )
+   SingletonID,
+   LastChangedAtMax;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit with additional implementation;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _Cities { create ( features : instance ); with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT
+  {
+    create;
+    update;
+  }
+
+  side effects
+  {
+    action SelectCustomizingTransptReq affects
+        $self;
+  }
+
+}
+
+define behavior for ZI_Cities alias Cities ##UNMAPPED_FIELD
+persistent table ZOV_CITIES
+draft table ZOV_CITIES_D
+lock dependent by _CitiesAll
+authorization dependent by _CitiesAll
+{
+  field ( mandatory : create )
+   Code;
+
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   Code;
+
+  field ( notrigger )
+   SingletonID;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZOV_CITIES
+  {
+    Code = CODE;
+    Name = NAME;
+  }
+
+  association _CitiesAll { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT
+  {
+    create;
+    update;
+    delete;
+  }
+
+}

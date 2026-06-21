@@ -34,7 +34,8 @@ authorization master ( global )
   draft action Resume;
   draft determine action Prepare;
 
-  action AddPerson;
+  static action AddPerson parameter ZOV_R_ADDPERSON;
+
   action createEvent;
   // Determinations
   determination SetDefaultValues on modify { create; }

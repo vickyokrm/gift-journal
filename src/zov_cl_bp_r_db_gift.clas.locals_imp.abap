@@ -5,8 +5,6 @@ CLASS lhc_zov_r_db_gift DEFINITION INHERITING FROM cl_abap_behavior_handler.
         IMPORTING
         REQUEST requested_authorizations FOR Gift
         RESULT result,
-      AddPerson FOR MODIFY
-        IMPORTING keys FOR ACTION Gift~AddPerson,
       createEvent FOR MODIFY
         IMPORTING keys FOR ACTION Gift~createEvent,
       SetDefaultValues FOR DETERMINE ON MODIFY
@@ -14,19 +12,15 @@ CLASS lhc_zov_r_db_gift DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS ValidateAmount FOR VALIDATE ON SAVE
       IMPORTING keys FOR Gift~ValidateAmount.
+    METHODS AddPerson FOR MODIFY
+      IMPORTING keys FOR ACTION Gift~AddPerson.
 
 ENDCLASS.
 
 CLASS lhc_zov_r_db_gift IMPLEMENTATION.
   METHOD get_global_authorizations.
   ENDMETHOD.
-  METHOD AddPerson.
-    "TODO: Implement AddPerson action
-    "  - Validate the person key supplied in the action parameters
-    "  - Read/validate from ZOV_DB_PERSON
-    "  - Update the gift record's inviter/invitee fields
-    "  - Report success or failure via failed/reported tables
-  ENDMETHOD.
+
   METHOD createEvent.
 
   ENDMETHOD.
@@ -74,4 +68,43 @@ CLASS lhc_zov_r_db_gift IMPLEMENTATION.
   ENDMETHOD.
 
 
+  METHOD AddPerson.
+
+    DATA lt_new_person TYPE TABLE FOR CREATE zov_r_db_person.
+
+    LOOP AT keys ASSIGNING FIELD-SYMBOL(<fs_key>).
+      APPEND VALUE #(
+                %cid = 'NEW_PERSON_CID' " A temporary Content ID for the framework
+                FirstName    = <fs_key>-%param-FirstName
+                LastName     = <fs_key>-%param-LastName
+                Initials     = <fs_key>-%param-Initials
+                City         = <fs_key>-%param-City
+                %control = VALUE #(
+                    FirstName    = if_abap_behv=>mk-on
+                    LastName     = if_abap_behv=>mk-on
+                    Initials     = if_abap_behv=>mk-on
+                    City         = if_abap_behv=>mk-on ) ) TO lt_new_person.
+    ENDLOOP.
+
+    MODIFY ENTITIES OF zov_r_db_person
+      ENTITY Person
+        CREATE FROM lt_new_person
+        MAPPED DATA(mapped_person)
+        FAILED DATA(failed_person)
+        REPORTED DATA(reported_person).
+
+    " Inform the UI of success or failure
+    IF failed_person IS NOT INITIAL.
+      " Pass error messages back to the Gift UI
+      reported = CORRESPONDING #( DEEP reported_person ).
+    ELSE.
+      " Optional: Send a success toast message back to the user
+      APPEND VALUE #(
+           %msg = new_message_with_text(
+                    severity = if_abap_behv_message=>severity-success
+                    text     = 'Person added successfully! You can now select them.' )
+      ) TO reported-gift.
+    ENDIF.
+
+  ENDMETHOD.
 ENDCLASS.
